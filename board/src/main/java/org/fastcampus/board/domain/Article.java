@@ -34,6 +34,10 @@ public class Article {
 
     @Setter @Column private String hashtag;
 
+    /**
+     * mappedBy는 어떤 이름으로 매핑하겟는가하는거임.
+     *
+     */
     @OrderBy("id")
     @OneToMany(mappedBy = "article")
     @ToString.Exclude
