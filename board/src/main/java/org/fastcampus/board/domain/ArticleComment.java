@@ -26,6 +26,11 @@ public class ArticleComment {
     @GeneratedValue(strategy = GenerationType.IDENTITY) //Mysql의 Auto increment는 IDENTITY 이거로 해야함.
     private Long id;
 
+    @Setter
+    @JoinColumn(name = "userId")
+    @ManyToOne(optional = false)
+    private UserAccount userAccount; // 유저 정보 (ID)
+
     @Setter @ManyToOne(optional = false) private Article article;
     @Setter @Column(nullable = false, length = 500) private String content;
 
@@ -36,13 +41,14 @@ public class ArticleComment {
 
     protected ArticleComment() {}
 
-    private ArticleComment(Article article, String content) {
+    private ArticleComment(Article article, UserAccount userAccount, String content) {
         this.article = article;
+        this.userAccount = userAccount;
         this.content = content;
     }
 
-    public static ArticleComment of(Article article, String content) {
-        return new ArticleComment(article, content);
+    public static ArticleComment of(Article article, UserAccount userAccount, String content) {
+        return new ArticleComment(article, userAccount, content);
     }
 
     @Override

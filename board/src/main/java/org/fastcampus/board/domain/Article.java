@@ -29,6 +29,11 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.IDENTITY) //Mysql의 Auto increment는 IDENTITY 이거로 해야함.
     private Long id;
 
+    @Setter
+    @JoinColumn(name = "userId")
+    @ManyToOne(optional = false)
+    private UserAccount userAccount; // 유저 정보 (ID)
+
     @Setter @Column(nullable = false) private String title;
     @Setter @Column(nullable = false, length = 10000) private String content;
 
