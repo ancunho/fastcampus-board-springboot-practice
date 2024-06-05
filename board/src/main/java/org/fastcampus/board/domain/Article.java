@@ -43,7 +43,7 @@ public class Article {
      * mappedBy는 어떤 이름으로 매핑하겟는가하는거임.
      *
      */
-    @OrderBy("id")
+    @OrderBy("createdAt ASC ")
     @OneToMany(mappedBy = "article")
     @ToString.Exclude
     private final Set<ArticleComment> articleComments = new LinkedHashSet<>();
@@ -56,14 +56,13 @@ public class Article {
     protected Article() {
     }
 
-    private Article(String title, String content, String hashtag) {
+    private Article(UserAccount userAccount, String title, String content) {
         this.title = title;
         this.content = content;
-        this.hashtag = hashtag;
     }
 
-    public static Article of(String title, String content, String hashtag) {
-        return new Article(title,content,hashtag);
+    public static Article of(UserAccount userAccount, String title, String content) {
+        return new Article(userAccount, title,content);
     }
 
     @Override
